@@ -32,8 +32,8 @@ T=300 * units.Kelvin
 dist = dmvdf.rvs(10000,m,T)
 theo = dmvdf.pdf(m,vrange,T)
 print dist
-plt.hist(dist,normed=1, bins=100)
-plt.plot(vrange, theo)
+plt.hist(dist,normed=1,alpha=0.4,bins=500)
+plt.plot(vrange, theo, lw=2)
 plt.xlabel('Velocity (km/s)')
 plt.ylabel('F(v)')
 plt.grid(True)
