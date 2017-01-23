@@ -5,6 +5,14 @@ from astropy import units
 from astropy import constants
 import matplotlib.pyplot as plt
 
+v_min = 0 * units.km/units.s
+v_max = 5 * units.km/units.s
+correction = 200
+vrange = np.linspace(v_min,v_max,num=1000)
+m=2 * units.GeV/constants.c**2
+T=230 * units.Kelvin
+num = 1000##int(input('Enter the number of random samples: '))
+
 class dmvdf_gen(rv_continuous):
 	"Dark Matter VPDF"
 	def pdf(self, m, v, T):
@@ -12,7 +20,7 @@ class dmvdf_gen(rv_continuous):
 	#	v = v * units.km / units.s
 	#	T = T * units.Kelvin
 		k = constants.k_B 	#Boltzmann Constant
-		return (np.sqrt((m/(2.*np.pi*k*T))**3)) * (4.*np.pi*(v**2)) * (np.exp(-(m*(v**2))/(2.*k*T))) / 600000
+		return (np.sqrt((m/(2.*np.pi*k*T))**3)) * (4.*np.pi*(v**2)) * (np.exp(-(m*(v**2))/(2.*k*T))) / correction
 
 	def rvs(self, size, m, T):
 	#	m = m * units.GeV / constants.c**2
@@ -23,16 +31,10 @@ class dmvdf_gen(rv_continuous):
 
 dmvdf = dmvdf_gen(name= 'dmvdf')
 
-v_min = 0 * units.km/units.s
-v_max = 5 * units.km/units.s
-vrange = np.linspace(v_min,v_max,num=1000)
-m=2 * units.GeV/constants.c**2
-T=300 * units.Kelvin
 
-dist = dmvdf.rvs(10000,m,T)
+dist = dmvdf.rvs(num,m,T)
 theo = dmvdf.pdf(m,vrange,T)
-print dist
-plt.hist(dist,normed=1,alpha=0.4,bins=500)
+plt.hist(dist,normed=1,alpha=0.4,bins=num/20)
 plt.plot(vrange, theo, lw=2)
 plt.xlabel('Velocity (km/s)')
 plt.ylabel('F(v)')
