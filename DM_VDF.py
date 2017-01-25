@@ -13,7 +13,7 @@ m=1 * units.GeV/constants.c**2
 T=230 * units.Kelvin
 num = 1000##int(input('Enter the number of random samples: '))
 
-class dmvdf_gen(rv_continuous):
+class test_dmvdf_gen(rv_continuous):
 	"Dark Matter VPDF"
 	def pdf(self, m, v, T):
 	#	m = m * units.GeV / constants.c**2
