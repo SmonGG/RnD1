@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 #		return v, (np.sqrt((m/(2.*np.pi*k*T))**3)) * (4.*np.pi*(v**2)) * (np.exp(-(m*(v**2))/(2.*k*T))) / 600000
 
 # #DM Parameters
-class DMclass(object):
+class dndE3_DMclass(object):
 	def __init__(self,mass,v,temp):
 		self.mass=mass * units.GeV / constants.c**2
 		self.v=v * units.km / units.s
@@ -27,7 +27,7 @@ class DMclass(object):
 		else:
 			self.temp=temp * units.Kelvin
 
-class HALOclass(object):
+class dndE3_HALOclass(object):
 	def __init__(self,v_min,v_max):
 		self.v_min=v_min * units.km / units.s
 		self.v_max=v_max * units.km / units.s
@@ -39,8 +39,8 @@ v_min = 1.
 v_max = 800.
 temp = ((0.5 * mass * (v * units.km/units.s)**2)/constants.k_B).cgs *units.g
 
-DM = DMclass(mass,v,temp)
-MW = HALOclass(v_min,v_max)
+DM = dndE3_DMclass(mass,v,temp)
+MW = dndE3_HALOclass(v_min,v_max)
 
 print DM.mass ##(float(input("Enter the mass of dark matter (GeV): ")))
 print DM.temp
