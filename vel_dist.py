@@ -31,11 +31,10 @@ print "Normalisation velocity ",a
 scale = a
 
 rv = maxwell.pdf(vrange, loc=0, scale=scale)
-plt.plot(vrange,rv,'-',color='b')
-plt.show()
+plt.plot(vrange,rv,'-',color='black', lw=2)
 
 v_values = maxwell.rvs(size=10000, loc=0, scale=scale)
-plt.hist(v_values,1000,color='b',normed=1)
+plt.hist(v_values,1000,color='b',normed=1, alpha=0.5)
 plt.show()
 
 
